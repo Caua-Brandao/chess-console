@@ -27,7 +27,7 @@ O objetivo do projeto é implementar as regras do xadrez do zero — sem bibliot
 
 ```
 chess-console/                  # raiz da solução
-├── chess-console.sln
+├── chess-console.slnx
 ├── .gitignore
 ├── README.md
 └── xadrez-console/             # projeto de console
@@ -50,7 +50,7 @@ cd chess-console
 dotnet run --project xadrez-console
 ```
 
-Também é possível abrir o arquivo `chess-console.sln` diretamente no Visual Studio e executar com `F5`.
+Também é possível abrir o arquivo `chess-console.slnx` diretamente no Visual Studio e executar com `F5`.
 
 O jogo solicita a posição de origem e, em seguida, a de destino, em notação algébrica — por exemplo, `e2` e depois `e4`.
 
