@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using tabuleiro;
 using Xadrez;
 
@@ -10,12 +11,16 @@ namespace xadrez_console
         {
             try
             {
-                Tabuleiro tab = new Tabuleiro(8, 8);
-                Torre t = new Torre(tab, Cor.Branca);
-                Rei r = new Rei(tab, Cor.Preta);
-                tab.colocarPeca(t, new Posicao(1, 2));
-                tab.colocarPeca(r, new Posicao(6, 7));
-                Tela.ImprimirTabuleiro(tab);
+                PartidaDeXadrez partida = new PartidaDeXadrez();
+                while (!partida.terminada)
+                {
+                    Tela.ImprimirTabuleiro(partida.tab);
+                    Console.Write("\nOrigem: ");
+                    Posicao origem = Tela.lerPosicaoXadrez().ToPosicao();
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.lerPosicaoXadrez().ToPosicao();
+                    partida.executaMovimento(origem, destino);
+                }
             }
             catch(TabuleiroException te)
             {

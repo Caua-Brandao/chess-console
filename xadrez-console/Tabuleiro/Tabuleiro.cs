@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Formats.Tar;
 using System.Text;
 
 namespace tabuleiro
@@ -25,6 +26,21 @@ namespace tabuleiro
             }
             pecas[pos.Linha, pos.Coluna] = p;
             p.posicao = pos;
+        }
+
+        public Peca retirarPeca(Posicao pos)
+        {
+            if (pecas[pos.Linha, pos.Coluna] == null)
+            {
+                return null;
+            }
+            else
+            {
+                Peca aux = pecas[pos.Linha, pos.Coluna];
+                aux.posicao = null;
+                pecas[pos.Linha, pos.Coluna] = null;
+                return aux;
+            }
         }
 
         public bool existePeca(Posicao pos)
