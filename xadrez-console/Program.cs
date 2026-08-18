@@ -8,10 +8,19 @@ namespace xadrez_console
     {
         static void Main(string[] args)
         {
-            Tabuleiro tab = new Tabuleiro(8, 8);
-            Torre t = new Torre(tab, Cor.Preta);
-            Tela.ImprimirTabuleiro(tab);
-            
+            try
+            {
+                Tabuleiro tab = new Tabuleiro(8, 8);
+                Torre t = new Torre(tab, Cor.Preta);
+                Rei r = new Rei(tab, Cor.Preta);
+                tab.colocarPeca(t, new Posicao(1, 2));
+                tab.colocarPeca(r, new Posicao(1, 9));
+                Tela.ImprimirTabuleiro(tab);
+            }
+            catch(TabuleiroException te)
+            {
+                Console.WriteLine(te.Message);
+            }
         }
     }
 }
