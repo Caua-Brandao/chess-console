@@ -11,6 +11,11 @@ namespace tabuleiro
         public int colunas { get; set; }
         public Peca[,] pecas { get; private set; }
 
+        public Peca Peca(Posicao pos)
+        {
+            return pecas[pos.Linha, pos.Coluna];
+        }
+
         public Tabuleiro(int linhas, int coluna)
         {
             this.linhas = linhas;

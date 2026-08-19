@@ -29,6 +29,10 @@ namespace Xadrez
             while (this.Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
+                if (Tab.Peca(pos) != null && Tab.Peca(pos).cor != cor)
+                {
+                    break;
+                }
                 pos.Linha = pos.Linha - 1;
             }
 
@@ -37,6 +41,10 @@ namespace Xadrez
             while (this.Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
+                if (Tab.Peca(pos) != null && Tab.Peca(pos).cor != cor)
+                {
+                    break;
+                }
                 pos.Linha = pos.Linha + 1;
             }
 
@@ -45,6 +53,10 @@ namespace Xadrez
             while (this.Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
+                if (Tab.Peca(pos) != null && Tab.Peca(pos).cor != cor)
+                {
+                    break;
+                }
                 pos.Coluna += 1;
             }
 
@@ -53,6 +65,10 @@ namespace Xadrez
             while (this.Tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
+                if (Tab.Peca(pos) != null && Tab.Peca(pos).cor != cor)
+                {
+                    break;
+                }
                 pos.Coluna -= 1;
             }
             return mat;
