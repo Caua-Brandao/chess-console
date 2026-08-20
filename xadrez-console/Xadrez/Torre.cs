@@ -12,7 +12,7 @@ namespace Xadrez
         {
             return "T";
         }
-        private bool podeMover(Posicao pos)
+        public override bool podeMover(Posicao pos)
         {
             Peca p = Tab.pecas[pos.Linha, pos.Coluna];
             return p == null || p.cor != this.cor;
