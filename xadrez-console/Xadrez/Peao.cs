@@ -5,7 +5,7 @@ using tabuleiro;
 
 namespace xadrez_console.Xadrez
 {
-    internal class Peao : Peca 
+    internal class Peao : Peca
     {
         public Peao(Tabuleiro tab, Cor cor) : base(cor, tab)
         {
@@ -53,8 +53,17 @@ namespace xadrez_console.Xadrez
 
                 // jogada normal
                 pos.definirValores(this.posicao.Linha - 1, this.posicao.Coluna);
-                if (Tab.posicaoValida(pos) && estaLivre(pos))                {
+                if (Tab.posicaoValida(pos) && estaLivre(pos))
+                {
                     mat[pos.Linha, pos.Coluna] = true;
+                }
+                if (qtdMovimentos == 0)
+                {
+                    pos.definirValores(this.posicao.Linha - 2, this.posicao.Coluna);
+                    if (Tab.posicaoValida(pos) && estaLivre(pos) && estaLivre(new Posicao(pos.Linha +1, pos.Coluna)))
+                    {
+                        mat[pos.Linha, pos.Coluna] = true;
+                    }
                 }
             }
             else
@@ -77,6 +86,14 @@ namespace xadrez_console.Xadrez
                 if (Tab.posicaoValida(pos) && estaLivre(pos))
                 {
                     mat[pos.Linha, pos.Coluna] = true;
+                }
+                if (qtdMovimentos == 0)
+                {
+                    pos.definirValores(this.posicao.Linha + 2, this.posicao.Coluna);
+                    if (Tab.posicaoValida(pos) && estaLivre(pos) && estaLivre(new Posicao(pos.Linha - 1, pos.Coluna)))
+                    {
+                        mat[pos.Linha, pos.Coluna] = true;
+                    }
                 }
             }
             return mat;
