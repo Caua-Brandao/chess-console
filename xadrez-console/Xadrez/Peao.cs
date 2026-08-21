@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using tabuleiro;
+using Xadrez;
 
 namespace xadrez_console.Xadrez
 {
     internal class Peao : Peca
     {
-        public Peao(Tabuleiro tab, Cor cor) : base(cor, tab)
+        private PartidaDeXadrez partida;
+        public Peao(Tabuleiro tab, Cor cor, PartidaDeXadrez partida) : base(cor, tab)
         {
+            this.partida = partida;
         }
 
         private bool estaLivre(Posicao pos)
@@ -65,6 +68,23 @@ namespace xadrez_console.Xadrez
                         mat[pos.Linha, pos.Coluna] = true;
                     }
                 }
+
+                // #jogada especial En passant
+                if (posicao.Linha == 3)
+                {
+                    // brancas
+                    pos.definirValores(this.posicao.Linha, this.posicao.Coluna + 1);
+                    if (Tab.posicaoValida(pos) && Tab.Peca(pos) == partida.vulneravelEnPassant)
+                    {
+                        mat[pos.Linha - 1, pos.Coluna] = true;
+                    }
+                    pos.definirValores(this.posicao.Linha, this.posicao.Coluna - 1);
+                    if (Tab.posicaoValida(pos) && Tab.Peca(pos) == partida.vulneravelEnPassant)
+                    {
+                        mat[pos.Linha - 1, pos.Coluna] = true;
+                    }
+                }
+
             }
             else
             {
@@ -95,16 +115,32 @@ namespace xadrez_console.Xadrez
                         mat[pos.Linha, pos.Coluna] = true;
                     }
                 }
+
+                // # jogada especial en passant
+
+                if (posicao.Linha == 4)
+                {
+                    pos.definirValores(this.posicao.Linha, this.posicao.Coluna + 1);
+                    if (Tab.posicaoValida(pos) && Tab.Peca(pos) == partida.vulneravelEnPassant)
+                    {
+                        mat[pos.Linha + 1, pos.Coluna] = true;
+                    }
+                    pos.definirValores(this.posicao.Linha, this.posicao.Coluna - 1);
+                    if (Tab.posicaoValida(pos) && Tab.Peca(pos) == partida.vulneravelEnPassant)
+                    {
+                        mat[pos.Linha + 1, pos.Coluna] = true;
+                    }
+                }
             }
             return mat;
         }
         public override bool podeMover(Posicao pos)
         {
             Peca p = Tab.Peca(pos);
-            return p == null || podeMover(pos);
+            return p == null || p.cor != this.cor;
         }
 
-        public override string ToString()
+        public override string ToString() 
         {
             return "P";
         }
